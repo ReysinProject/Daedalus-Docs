@@ -3,7 +3,7 @@ name: Deploy Astro site to VPS
 
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
   workflow_dispatch:
 
 env:
