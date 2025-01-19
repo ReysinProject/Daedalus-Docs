@@ -1,36 +1,116 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: Daedalus Documentation
+description: Welcome to the Daedalus documentation. Learn how to build structured, architecturally elegant Python web APIs with Daedalus.
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Build Structured, Architecturally Elegant Python Web APIs
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/hero_img.png
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get Started
+      link: /guides/getting-started/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: View on GitHub
+      link: https://github.com/ReysinProject/Daedalus
+      icon: github
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Welcome to Daedalus
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>
+Daedalus is a powerful and flexible Python library designed to simplify the process of creating APIs. It provides a clean, modular way to integrate services, controllers, and endpoints, making it easy to build scalable and maintainable applications. With support for FastAPI and Falcon frameworks, Daedalus gives you the freedom to choose the right tool for your needs.
+
+## Key Features
+
+- **Framework Agnostic:** Supports FastAPI and Falcon for building APIs.
+- **Modular Design:** Easily inject services into controllers using simple decorators.
+- **Service Layer:** Provides a service layer to encapsulate business logic.
+- **Controller Layer:** Easily define API controllers and register endpoints.
+- **Routing and Endpoint Decorators:** Create routes dynamically with minimal boilerplate code.
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.13+ is required.
+- Install the necessary dependencies:
+
+```bash
+pip install daedalus
+```
+
+### Quick Start Guide
+
+1. **Application Setup:**
+Create the application instance using `DaedalusFactory` and specify the module and framework (FastAPI or Falcon).
+
+```python
+from daedalus.core.factory import DaedalusFactory
+from example.src.main_module import MainModule
+
+app = DaedalusFactory(
+module=MainModule,
+framework='fastapi'  # or 'falcon' for Falcon
+)
+
+app.serve(
+port=8000,
+host='localhost',
+cors=True
+)
+```
+
+2. **Defining Services:**
+Define your services using the `@Service` decorator. Services are responsible for business logic and can be injected into controllers.
+
+```python
+from daedalus.bootstrap.decorator.service import Service
+from example.src.logger.logger_service import LoggerService
+
+@Service()
+class UserService:
+inject = ['LoggerService']
+
+    def __init__(self, logger_service: LoggerService):
+        self.logger = logger_service
+
+    def create_user(self, username):
+        self.logger.log(f"User created: {username}")
+```
+
+3. **Creating Controllers:**
+Controllers are responsible for handling HTTP requests and responses. Define endpoints using the `@Controller` decorator and the `@endpoint` decorator to specify routes.
+
+```python
+from typing import Any, Dict, List
+
+from daedalus.api.decorators.endpoint import endpoint
+from daedalus.api.interface.response import JanusResponse
+from daedalus.bootstrap.decorator.controller import Controller
+from example.src.user.user_service import UserService
+
+@Controller()
+class UserController:
+inject = ['UserService']
+
+    def __init__(self, user_service: UserService):
+        self.user_service = user_service
+
+    @endpoint(path="/user")
+    def create_user_route(self, req):
+        self.user_service.create_user("John Doe")
+        return JanusResponse(
+            status_code=200,
+            data={"message": "User created"}
+        )
+```
+
+## Explore Daedalus
+
+Dive deeper into the capabilities of Daedalus by exploring our detailed guides and tutorials. Whether you're a beginner or an experienced developer, you'll find everything you need to build robust and efficient APIs.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

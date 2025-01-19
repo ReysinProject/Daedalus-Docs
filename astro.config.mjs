@@ -6,17 +6,14 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'Daedalus',
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/ReysinProject/Daedalus',
 			},
 			sidebar: [
 				{
 					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
+					autogenerate: { directory: 'guides' },
 				},
 				{
 					label: 'Reference',
