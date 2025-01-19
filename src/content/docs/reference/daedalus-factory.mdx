@@ -1,0 +1,100 @@
+---
+title: DaedalusFactory
+description: The main class to create a Daedalus application.
+sidebar:
+  order: 1
+---
+import { Card } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The `DaedalusFactory` class is responsible for initializing and serving the Daedalus application. It handles the registration and mapping of modules, as well as the initialization of the API framework.
+
+## Class Prototype
+
+```python
+class DaedalusFactory:
+    def __init__(
+        self,
+        module,
+        framework: Literal["falcon", "fastapi"]="fastapi"
+    ) -> DaedalusFactory
+
+    def serve(
+        self,
+        port:int=8080,
+        host:str='localhost',
+        cors: bool =False
+    ) -> None:
+
+```
+
+## Instance Methods
+
+<Card title="__init__(module, framework)">
+    <Tabs>
+        <TabItem label={"Explanation"}>
+            Initializes the Daedalus instance. Registers and maps modules. Injects all dependencies. Returns the Daedalus instance.
+        </TabItem>
+        <TabItem label={"Parameter"}>
+            | Parameter | Type                         | Default |
+            |-----------|------------------------------|---------|
+            | module    | Any                          | None    |
+            | framework | Literal["falcon", "fastapi"] | fastapi |
+        </TabItem>
+        <TabItem label={"Returns"}>
+            | Return Type | Description          |
+            |-------------|----------------------|
+            | Daedalus    | The Daedalus instance |
+        </TabItem>
+    </Tabs>
+</Card>
+
+<Card title="serve(host, port, cors)">
+    <Tabs>
+        <TabItem label={"Explanation"}>
+            Starts the API server on the specified host and port.
+        </TabItem>
+        <TabItem label={"Parameter"}>
+            | Parameter | Type    | Default   |
+            |-----------|---------|-----------|
+            | cors      | Boolean | False     |
+            | port      | Number  | 8080      |
+            | host      | String  | localhost |
+        </TabItem>
+        <TabItem label={"Returns"}>
+            | Return Type | Description          |
+            |-------------|----------------------|
+            | None        |                      |
+        </TabItem>
+    </Tabs>
+</Card>
+
+## Example Usage
+
+```python
+from my_application import root_module
+
+# Initialize the Daedalus instance
+daedalus = DaedalusFactory(module=root_module, framework="fastapi")
+
+# Serve the application
+daedalus.serve(port=8080, host='localhost', cors=True)
+```
+
+## Notes
+
+- The `DaedalusFactory` class uses the `BootstrapManager` to register all modules and the `ApiFactory` to initialize the API framework.
+- The `serve` method starts the API server on the specified host and port.
+- CORS (Cross-Origin Resource Sharing) can be enabled by setting the `cors` parameter to `True`.
+
+## Dependencies
+
+- `inspect`
+- `os`
+- `typing.Literal`
+- `daedalus.api.factory.ApiFactory`
+- `daedalus.bootstrap.bootstrap_manager.BootstrapManager`
+- `daedalus.bootstrap.module_node.ModuleNode`
+- `daedalus.logger.logger.Logger`
+
+This documentation provides a comprehensive overview of the `DaedalusFactory` class, including its methods, parameters, and example usage.

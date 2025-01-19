@@ -1,0 +1,54 @@
+---
+title: Project Structure
+description: A guide to help you understand the structure of a Daedalus project.
+sidebar:
+  order: 2
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+#### Example Project Structure
+
+<FileTree>
+
+    - README.md
+    - poetry.lock
+    - pyproject.toml
+    - .gitignore
+    - `__main__.py`
+    - my_project/
+        - __*main_module.py*__
+        - __user/__
+            - <b>user_module.py</b>
+            - <b>user_controller.py</b>
+            - <b>user_service.py</b>
+        - __auth/__
+            - <b>auth_module.py</b>
+            - <b>auth_controller.py</b>
+            - <b>auth_service.py</b>
+
+</FileTree>
+
+#### Project Structure
+
+A Daedalus project is structured in a way that allows you to easily organize your codebase. The main module is the entry point of your application. It is where you initialize the Daedalus application and register all your modules.
+
+Each module is a collection of controllers and services that are related to a specific domain. For example, a user module could contain a user controller and a user service. The user controller is responsible for handling incoming requests, while the user service is responsible for interacting with the database.
+
+The project structure is designed to be modular and scalable. You can easily add new modules as your project grows, and each module can be developed and tested independently.
+
+#### Main script
+
+The `__main__.py` file is the main script of your application. It is where you create an instance of the DaedalusFactory class and serve your application.
+
+#### Naming Convention
+
+- **Module**: A collection of controllers and services related to a specific domain.
+- **Controller**: Handles incoming requests and returns responses.
+- **Service**: Interacts with the database and performs business logic.
+
+The naming convention is important for maintaining consistency and readability in your codebase. It helps you quickly identify the purpose of each file and understand how they are related to each other.
+
+#### Conclusion
+
+Understanding the project structure is essential for developing and maintaining a Daedalus application. By following the conventions and best practices outlined in this guide, you can create a well-organized and scalable codebase that is easy to work with and maintain.
