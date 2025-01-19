@@ -8,7 +8,7 @@ on:
 
 env:
   BUILD_PATH: "."
-  DEPLOY_PATH: "/var/www/html"  # Chemin de déploiement sur le VPS
+  DEPLOY_PATH: "~/docs/html"
 
 jobs:
   build-and-deploy:
@@ -59,3 +59,5 @@ jobs:
           if [ -d "${{ env.DEPLOY_PATH }}_backup" ]; then
             sudo rm -rf ${{ env.DEPLOY_PATH }}_backup
           fi
+          
+          docker compose restart webserver
