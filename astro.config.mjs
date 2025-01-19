@@ -13,8 +13,12 @@ export default defineConfig({
         },
         sidebar: [
             {
-                label: 'Guides',
-                autogenerate: { directory: 'guides' },
+                label: 'Introduction',
+                slug: 'introduction',
+            },
+            {
+                label: 'Basics',
+                autogenerate: { directory: 'basics'}
             },
             {
                 label: 'Reference',
@@ -24,7 +28,7 @@ export default defineConfig({
         customCss: [
             './src/tailwind.css',
         ]
-		}),
+    }),
         tailwind({
             applyBaseStyles: false,
         })

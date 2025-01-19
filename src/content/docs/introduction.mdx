@@ -1,0 +1,64 @@
+---
+title: Introduction
+description: A guide to help you get started with Daedalus.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+### Context
+
+Daedalus is a Python web framework that allows you to build RESTful APIs quickly and easily. It is designed to be simple, modular, and scalable, making it ideal for developing web applications of any size.
+
+### Philosophy
+
+Daedalus is built on the principle of simplicity. It provides a clean and intuitive API that allows you to focus on writing your application logic without getting bogged down in boilerplate code.
+
+### Features
+
+- **Modular**: Daedalus is designed to be modular, allowing you to organize your codebase into separate modules that can be developed and tested independently.
+- **Scalable**: Daedalus is built to scale with your application. You can easily add new modules and endpoints as your project grows.
+- **Fast**: Daedalus is built on top of the FastAPI framework, which is known for its speed and performance.
+- **Easy to Use**: Daedalus provides a simple and intuitive API that makes it easy to get started with building web applications.
+
+### What You'll Learn
+
+In this guide, you will learn how to:
+
+- Install Daedalus
+- Create a new project
+- Understand the project structure
+- Configure Daedalus
+
+### Prerequisites
+
+Before you get started, make sure you have the following installed on your machine:
+
+- Python 3.13+
+- DaedalusCLI
+- Poetry (optional, but recommended)
+
+### Create a new project
+
+To create a new Daedalus project, you can use the DaedalusCLI tool. This tool will generate a new project structure for you, including all the necessary files and directories to get started.
+
+To create a new project, run the following command:
+
+```bash
+daedalus new my_project
+```
+
+This will create a new directory called `my_project` with the following structure:
+
+
+<FileTree>
+
+    - README.md
+    - poetry.lock
+    - pyproject.toml
+    - .gitignore
+    - `__main__.py`
+    - my_project/
+        - __*main_module.py*__
+
+</FileTree>
+

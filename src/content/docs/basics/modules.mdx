@@ -1,0 +1,74 @@
+---
+title: Modules
+description: A guide to help you understand how to create and use modules in Daedalus.
+---
+
+import {Aside, Card} from '@astrojs/starlight/components';
+
+A module is a collection of controllers and services that are related to a specific domain.
+
+To define a module in Daedalus, you need to create a new Python file and define a class decorated with the `@Module` decorator.
+
+<Aside type="danger">
+    The name of the module class should be unique within the application.
+</Aside>
+
+```python
+from daedalus import Module
+
+@Module()
+class UserModule:
+    imports = []
+    controllers = []
+    providers = []
+    exports = []
+```
+
+<Aside type="note">
+  The `imports`, `controllers`, `providers`, and `exports` properties are used to define the dependencies of the module.
+</Aside>
+
+<Card title="User Module">
+    ```python
+    from daedalus import Module
+
+    @Module()
+    class UserModule:
+        controllers = ['UserController']
+        providers = ['UserService']
+    ```
+
+    The module registers the `UserController` and injects the `UserService` into the controller.
+</Card>
+
+<Card title="User Service">
+    ```python
+    from daedalus import Service
+
+    @Service()
+    class UserService
+
+    def get_user(self):
+        pass
+    ```
+
+    The service is responsible for interacting with the database.
+</Card>
+
+<Card title="User Controller">
+    ```python
+    from daedalus import Controller
+
+    @Controller()
+    class UserController:
+        def __init__(self, user_service):
+            self.user_service = user_service
+
+        @endpoint('/user', methods=['GET'])
+        def get_user(self):
+            user = self.user_service.get_user()
+            return user
+    ```
+
+    The controller is responsible for handling incoming requests.
+</Card>
