@@ -1,0 +1,84 @@
+---
+title: Services
+description: A guide to help you understand how to create and use services in Daedalus.
+---
+
+import {Aside, Card} from '@astrojs/starlight/components';
+
+A service is a class that encapsulates business logic and data access operations. Services are used to separate the business logic from the controllers, making the code more maintainable and testable.
+
+To define a service in Daedalus, you need to create a new Python file and define a class decorated with the `@Service` decorator.
+
+<Aside type="danger">
+    The name of the service class should be unique within the application.
+</Aside>
+
+```python
+from daedalus import Service
+
+@Service()
+class UserService:
+    def __init__(self):
+        pass
+
+    def get_users(self):
+        pass
+
+    def create_user(self, user_data):
+        pass
+```
+
+<Aside type="note">
+    Services can be injected into other services and controllers using dependency injection.
+</Aside>
+
+<Card title="Basic Service">
+    ```python
+    from daedalus import Service
+
+    @Service()
+    class EmailService:
+        def send_email(self, to: str, subject: str, content: str):
+            # Email sending logic here
+            pass
+    ```
+
+    A simple service that handles email sending functionality.
+</Card>
+
+<Card title="Database Service">
+    ```python
+    from daedalus import Service
+
+    @Service()
+    class DatabaseService:
+        def __init__(self, db_connection):
+            self.db = db_connection
+
+        def query(self, sql: str):
+            return self.db.execute(sql)
+    ```
+
+    A service that manages database operations.
+</Card>
+
+<Card title="Service with Dependencies">
+    ```python
+    from daedalus import Service
+
+    @Service()
+    class UserNotificationService:
+        def __init__(self, email_service: EmailService):
+            self.email_service = email_service
+
+        def notify_user(self, user_id: str, message: str):
+            user = self.get_user(user_id)
+            self.email_service.send_email(
+                to=user.email,
+                subject="New Notification",
+                content=message
+            )
+    ```
+
+    A service that depends on another service through dependency injection.
+</Card>

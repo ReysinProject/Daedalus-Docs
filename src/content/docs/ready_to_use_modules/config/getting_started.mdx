@@ -1,0 +1,54 @@
+---
+title: Getting Started
+description: Learn how to get started with Daedalus Config Module
+---
+
+import {Steps, Aside} from "@astrojs/starlight/components";
+
+The Config Module allows you to manage your project configuration
+
+<Steps>
+    1. Load different configurations based on the environment
+    2. Use the configuration in your project
+    3. Validate the configuration
+</Steps>
+
+<Aside type={"note"}>
+    The Config Module is designed to be used in a variety of projects and can be customized to fit your needs.
+</Aside>
+
+## Installation
+
+To install the Config Module, run the following command:
+
+```bash
+daedalus add config
+```
+
+## Usage
+
+To use the Config Module in your project, follow these steps:
+
+1. Add the module to your needed modules:
+
+```python
+from daedalus import ConfigModule
+
+@Module()
+class MyModule:
+    import = ['ConfigModule']
+```
+
+In your project, you can now use the Config Module to load and validate your configuration.
+
+```python
+from daedalus import Service
+
+@Service()
+class MyService:
+    def __init__(self, config_service: ConfigService):
+        self.config = config_service
+
+    def get_email_config(self):
+        return self.config.get('email')
+```

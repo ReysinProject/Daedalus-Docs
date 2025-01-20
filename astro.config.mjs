@@ -24,6 +24,19 @@ export default defineConfig({
                 label: 'Reference',
                 autogenerate: { directory: 'reference' },
             },
+            {
+                label: 'Ready to use modules',
+                items: [
+                    {
+                        label: 'Introduction',
+                        slug: 'ready_to_use_modules/introduction',
+                    },
+                    {
+                        label: 'Config Modules',
+                        autogenerate: { directory: 'ready_to_use_modules/config' }
+                    }
+                ]
+            }
         ],
         customCss: [
             './src/tailwind.css',

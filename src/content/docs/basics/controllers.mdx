@@ -1,0 +1,89 @@
+---
+title: Controllers
+description: A guide to help you understand how to create and use controllers in Daedalus.
+---
+
+import {Aside, Card} from '@astrojs/starlight/components';
+
+A controller is responsible for handling incoming requests and returning responses to the client. Controllers are the entry points of your application and should focus on request/response handling rather than business logic.
+
+To define a controller in Daedalus, you need to create a new Python file and define a class decorated with the `@Controller` decorator.
+
+<Aside type="danger">
+    The name of the controller class should be unique within the application.
+</Aside>
+
+```python
+from daedalus import Controller
+
+@Controller()
+class UserController:
+def __init__(self):
+pass
+
+    @endpoint('/users', methods=['GET'])
+    def get_users(self):
+        pass
+```
+
+<Aside type="note">
+    Controllers can use services through dependency injection to handle business logic and data operations.
+</Aside>
+
+<Card title="Basic Controller">
+    ```python
+    from daedalus import Controller, endpoint
+
+    @Controller()
+    class HomeController:
+        @endpoint('/', methods=['GET'])
+        def index(self):
+        return {"message": "Welcome to Daedalus!"}
+    ```
+
+    A simple controller that handles the home route.
+</Card>
+
+<Card title="Controller with Service">
+    ```python
+    from daedalus import Controller, endpoint
+
+    @Controller()
+    class UserController:
+        def __init__(self, user_service: UserService):
+            self.user_service = user_service
+
+        @endpoint('/users', methods=['GET'])
+        def get_users(self):
+            users = self.user_service.get_users()
+            return {"users": users}
+
+        @endpoint('/users', methods=['POST'])
+        def create_user(self, request):
+            user_data = request.json()
+            new_user = self.user_service.create_user(user_data)
+            return {"user": new_user}
+    ```
+
+    A controller that uses a service to handle business logic.
+</Card>
+
+<Card title="Controller with Request Validation">
+    ```python
+    from daedalus import Controller, endpoint, validate
+
+    @Controller()
+    class ProductController:
+        def __init__(self, product_service: ProductService):
+            self.product_service = product_service
+
+        @endpoint('/products', methods=['POST'])
+        @validate(schema=ProductSchema)
+        def create_product(self, request):
+            product_data = request.validated_data
+            new_product = self.product_service.create_product(product_data)
+            return {"product": new_product}
+    ```
+
+    A controller that includes request validation using schemas.
+</Card>
