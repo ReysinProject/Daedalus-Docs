@@ -8,7 +8,7 @@ on:
 
 env:
   BUILD_PATH: "."
-  DEPLOY_PATH: "~/docs/html"
+  DEPLOY_PATH: "~/nginx/html/daedalus"
 
 jobs:
   build-and-deploy:
