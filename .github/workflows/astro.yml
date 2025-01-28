@@ -61,4 +61,4 @@ jobs:
           fi
           
           cd ${{ env.DEPLOY_PATH }}
-          docker compose restart webserver
+          docker compose restart nginx
