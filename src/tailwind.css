@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card {
+    position: relative;
+    padding: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    pointer-events: none;
+}
+
+.card:hover::before {
+    border-color: #ffa061;
+    animation: borderGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(220, 116, 52, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(241, 125, 53, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(220, 111, 52, 0.2);
+    }
+}
