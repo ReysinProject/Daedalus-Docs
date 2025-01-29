@@ -29,6 +29,7 @@ jobs:
           git pull origin main
           pnpm i
           pnpm build
+          sudo rm -rf ~/nginx/html/daedalus/*
           mv dist/* ~/nginx/html/daedalus
           cd ~/nginx
           docker compose restart
